@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+        
+        while (low <= high) {
+            // Prevents potential overflow compared to (low + high) / 2
+            int mid = low + (high - low) / 2; 
+            
+            if (nums[mid] == target) {
+                return mid; // Target found
+            } else if (nums[mid] < target) {
+                low = mid + 1; // Search in the right half
+            } else {
+                high = mid - 1; // Search in the left half
+            }
+        }
+        
+        // If target is not found, 'low' will be at the correct insertion index
+        return low;
+    }
+};
